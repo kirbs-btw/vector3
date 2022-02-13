@@ -16,6 +16,12 @@ class vector3:
         print(values)
 
     def vis(self):
+        """
+        gets you the values of the vector as an array
+        [1, -4, 7]
+        :return: the values of the vector as an array [self.x1, self.x2, self.x3]
+        """
+
         values = [self.x1, self.x2, self.x3]
         return values
 
@@ -26,15 +32,33 @@ class plane3param:
         self.clampingB = clampingB
 
     def point(self, r, s):
+        """
+        gets you a point at the plane in form of a vector 3
+        to get the values printed type a .print() after your var
+        :param r: value r --> real Number
+        :param s: value s --> real Number
+        :return: the vector of the point on the plane
+        """
+
         r3 = multiplyVektor3(self.clampingA, r)
         s3 = multiplyVektor3(self.clampingB, s)
 
         return addVector3(addVector3(self.supportV, r3), s3)
 
     def normalVector(self):
+        """
+        does the cross product of clampingA and clampingB to get the
+        normal vector
+        :return: normal Vector of the plane
+        """
         return crossProduct(self.clampingA, self.clampingB)
 
     def coordForm(self):
+        """
+        returns the coord Form of the plane
+        :return: coord form of the plane
+        """
+
         normalV = self.normalVector()
         n = -dotProduct(normalV, self.supportV)
 
@@ -42,10 +66,22 @@ class plane3param:
         return coordPlane
 
     def normalForm(self):
+        """
+        returns the normal form of the plane
+        :return: normal form of the plane
+        """
         n = self.normalVector()
 
         normPlane3 = plane3normal(n, self.supportV)
         return normPlane3
+
+    def print(self):
+        support = self.supportV
+        clampA = self.clampingA
+        clampB = self.clampingB
+
+        print(f"x-> = {support.vis()} + r * {clampA.vis()} + s * {clampB.vis()}")
+
 
 class plane3coord:
     def __init__(self, x1, x2, x3, n):
@@ -62,6 +98,12 @@ class plane3coord:
         self.n = n
 
     def print(self):
+        """
+        prints the vector to visualize
+        e.g.:
+        (5x1) + (-7x2) + (1x3) = 18
+        :return:
+        """
         out = f"({self.x1}x1) + ({self.x2}x2) + ({self.x3}x3) = {self.n}"
         print(out)
 
@@ -69,6 +111,23 @@ class plane3normal:
     def __init__(self, nV, supportV):
         self.n = nV
         self.supportV = supportV
+
+    def paramForm(self):
+
+
+        clampAx1 = 0
+        clampAx2 = self.n.x3
+        clampAx3 = -self.n.x2
+
+        clampBx1 = self.n.x2
+        clampBx2 = -self.n.x1
+        clampBx3 = 0
+
+        clampA = vector3(clampAx1, clampAx2, clampAx3)
+        clampB = vector3(clampBx1, clampBx2, clampBx3)
+
+        paramForm = plane3param(self.supportV, clampA, clampB)
+        return paramForm
 
     def print(self):
         out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
@@ -79,7 +138,7 @@ def sumVector3(vX):
     """
     vector sum
     :param vX: vector
-    :return:
+    :return: a real number
     """
 
     vSum = math.sqrt(vX.x1 ** 2 + vX.x2 ** 2 + vX.x3 ** 2)
@@ -105,6 +164,9 @@ def multiplyVektor3(vA, n):
 
 def calcVector3(vA, vB):
     """
+    vB is the second vector and vA is the starting point
+    vA --------> vB
+    vC is the vector between thees two
 
     :param vectorA: vector A
     :param vectorB: vector B
@@ -169,13 +231,16 @@ def crossProduct(vA, vB):
 
     return vC
 
-def doPlane():
+"""
+testing area with examples how to use 
+"""
+def doPlaneParam():
     sup3 = vector3(0, 1, 5)
-    clap3A = vector3(5, 7,1)
-    clap3B = vector3(2, -1, 2)
+    clamp3A = vector3(5, 7,1)
+    clamp3B = vector3(2, -1, 2)
 
 
-    plane = plane3param(sup3, clap3A, clap3B)
+    plane = plane3param(sup3, clamp3A, clamp3B)
 
     newPoint = plane.point(4, 2)
     newPoint.print()
@@ -188,7 +253,17 @@ def doPlane():
 
     normalPlane = plane.normalForm()
     normalPlane.print()
-    
+
+def doPlaneNormal():
+    normalV = vector3(1, 5, 6)
+    supportV = vector3(2, 5, 1)
+    normalPlane = plane3normal(normalV, supportV)
+    normalPlane.print()
+    paramForm = normalPlane.paramForm()
+    paramForm.print()
+    newNormal = paramForm.normalForm()
+    newNormal.print()
+
 def main():
     #len vector calc
     vA = vector3(1, 5, 7)
@@ -209,4 +284,10 @@ def main():
     crossProduct(vA, vB).print()
 
 if __name__ == '__main__':
-    doPlane()
+    doPlaneNormal()
+
+"""
+credits to Bastian Lipka
+-
+A lib for calculations with vectors (3d) 
+"""
