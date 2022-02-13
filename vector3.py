@@ -76,6 +76,14 @@ class plane3param:
         return normPlane3
 
     def print(self):
+        """
+        prints the param form of the plane to vis for debug
+
+        e.g.
+        x-> = [2, 5, 1] + r * [0, 6, -5] + s * [5, -1, 0]
+
+        :return:
+        """
         support = self.supportV
         clampA = self.clampingA
         clampB = self.clampingB
@@ -113,7 +121,10 @@ class plane3normal:
         self.supportV = supportV
 
     def paramForm(self):
-
+        """
+        converts Normal plane to param plane
+        :return: returns new param plane
+        """
 
         clampAx1 = 0
         clampAx2 = self.n.x3
