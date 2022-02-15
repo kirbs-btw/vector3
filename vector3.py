@@ -25,6 +25,59 @@ class vector3:
         values = [self.x1, self.x2, self.x3]
         return values
 
+class plane3:
+    def __init__(self, paramPlane, normalPlane, coordPlane):
+        self.param = paramPlane
+        self.normal = normalPlane
+        self.coord = coordPlane
+
+        self.getForms()
+
+    def getParam(self):
+        if self.normal != None:
+            self.param = self.normal.paramForm() #to be written
+        elif self.coord != None:
+            self.param = self.coord.paramForm() #to be written
+
+    def getNormal(self):
+        if self.param != None:
+            self.normal = self.param.normalForm()
+        elif self.coord != None:
+            self.normal = self.coord.normalForm() #to be written
+
+    def getCoord(self):
+        if self.param != None:
+            self.coord = self.param.coordForm()
+        elif self.normal != None:
+            self.coord = self.normal.coordForm() #to be written
+
+    def getForms(self):
+        if self.param != None and self.normal != None and self.coord != None:
+            return
+
+        if self.param == None and self.normal == None and self.coord == None:
+            return
+
+        if self.normal == None and self.coord == None:
+            self.getNormal()
+            self.getCoord()
+
+        if self.param == None and self.coord == None:
+            self.getParam()
+            self.getCoord()
+
+        if self.param == None and self.normal == None:
+            self.getParam()
+            self.getNormal()
+
+    def print(self):
+        if self.param == None and self.normal == None and self.coord == None:
+            print(0)
+        else:
+            self.param.print()
+            self.normal.print()
+            self.coord.print()
+
 class plane3param:
     def __init__(self, supportV3, clampingA, clampingB):
         self.supportV = supportV3
