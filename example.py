@@ -29,6 +29,10 @@ def doPlaneNormal():
     newNormal = paramForm.normalForm()
     newNormal.print()
 
+def plane():
+    plane = plane3(None, None, None)
+    plane.print()
+
 def main():
     #len vector calc
     vA = vector3(1, 5, 7)
@@ -50,4 +54,4 @@ def main():
 
 
 if __name__ == '__main__':
-    doPlaneNormal()
+    plane()
