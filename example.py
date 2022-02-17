@@ -20,14 +20,17 @@ def doPlaneParam():
     normalPlane.print()
 
 def doPlaneNormal():
-    normalV = vector3(1, 5, 6)
-    supportV = vector3(2, 5, 1)
+    normalV = vector3(1, 2, 1)
+    supportV = vector3(1, 3, 2)
     normalPlane = plane3normal(normalV, supportV)
     normalPlane.print()
-    paramForm = normalPlane.paramForm()
-    paramForm.print()
-    newNormal = paramForm.normalForm()
-    newNormal.print()
+    coordForm = normalPlane.coordForm()
+    coordForm.print()
+
+    #paramForm = normalPlane.paramForm()
+    #paramForm.print()
+    #newNormal = paramForm.normalForm()
+    #newNormal.print()
 
 def plane():
     plane = plane3(None, None, None)
@@ -54,4 +57,4 @@ def main():
 
 
 if __name__ == '__main__':
-    plane()
+    doPlaneNormal()
