@@ -49,7 +49,7 @@ class plane3:
         if self.param != None:
             self.coord = self.param.coordForm()
         elif self.normal != None:
-            self.coord = self.normal.coordForm() #to be written
+            self.coord = self.normal.coordForm()
 
     def getForms(self):
         if self.param != None and self.normal != None and self.coord != None:
@@ -192,6 +192,18 @@ class plane3normal:
 
         paramForm = plane3param(self.supportV, clampA, clampB)
         return paramForm
+
+    def coordForm(self):
+        coordX1 = self.n.x1
+        coordX2 = self.n.x2
+        coordX3 = self.n.x3
+        n = dotProduct(self.n, self.supportV)
+
+        coordPlane = plane3coord(coordX1, coordX2, coordX3, n)
+
+        return coordPlane
+
+
 
     def print(self):
         out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
