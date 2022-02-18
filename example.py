@@ -32,9 +32,16 @@ def doPlaneNormal():
     #newNormal = paramForm.normalForm()
     #newNormal.print()
 
+def coordtoNormal():
+    coordPlane = plane3coord(1, 4, 5, 2)
+    normalPlane = coordPlane.normalForm()
+    normalPlane.print()
+
 def plane():
     plane = plane3(None, None, None)
     plane.print()
+
+
 
 def main():
     #len vector calc
@@ -57,4 +64,4 @@ def main():
 
 
 if __name__ == '__main__':
-    doPlaneNormal()
+    coordtoNormal()
