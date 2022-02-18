@@ -35,7 +35,7 @@ class plane3:
 
     def getParam(self):
         if self.normal != None:
-            self.param = self.normal.paramForm() #to be written
+            self.param = self.normal.paramForm()
         elif self.coord != None:
             self.param = self.coord.paramForm() #to be written
 
@@ -43,7 +43,7 @@ class plane3:
         if self.param != None:
             self.normal = self.param.normalForm()
         elif self.coord != None:
-            self.normal = self.coord.normalForm() #to be written
+            self.normal = self.coord.normalForm()
 
     def getCoord(self):
         if self.param != None:
@@ -158,6 +158,28 @@ class plane3coord:
         self.x3 = x3
         self.n = n
 
+    def normalForm(self):
+        n1 = self.x1
+        n2 = self.x2
+        n3 = self.x3
+        nV = vector3(n1, n2, n3)
+
+        s1 = 0
+        s2 = 0
+        s3 = 0
+
+        if self.x3 != 0:
+            s3 = self.n / self.x3
+        elif self.x2 != 0:
+            s2 = self.n / self.x2
+        else:
+            s1 = self.n / self.x1
+
+        supportV = vector3(s1, s2, s3)
+        normalPlane = plane3normal(nV, supportV)
+
+        return normalPlane
+
     def print(self):
         """
         prints the vector to visualize
@@ -203,8 +225,6 @@ class plane3normal:
 
         return coordPlane
 
-
-
     def print(self):
         out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
         print(out)
@@ -235,8 +255,6 @@ def multiplyVektor3(vA, n):
     vB = vector3(a1, a2, a3)
 
     return vB
-
-
 
 def calcVector3(vA, vB):
     """
