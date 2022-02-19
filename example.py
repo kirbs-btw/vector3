@@ -38,9 +38,14 @@ def coordtoNormal():
     normalPlane.print()
 
 def plane():
-    plane = plane3(None, None, None)
+    coordPlane = plane3coord(4, 4, 2, 1)
+    plane = plane3(None, None, coordPlane)
     plane.print()
 
+def coordToParam():
+    coordPlane = plane3coord(5, 2, 1, 25)
+    paramPlane = coordPlane.paramForm()
+    paramPlane.print()
 
 
 def main():
@@ -64,4 +69,4 @@ def main():
 
 
 if __name__ == '__main__':
-    coordtoNormal()
+    plane()
