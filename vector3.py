@@ -1,6 +1,11 @@
 import math
 
+
 class vector3:
+    """
+    creates 3d Vectors in python
+    """
+
     def __init__(self, x1, x2, x3):
         self.x1 = x1
         self.x2 = x2
@@ -12,7 +17,7 @@ class vector3:
         :return:
         """
 
-        values = [self.x1, self.x2,  self.x3]
+        values = [self.x1, self.x2, self.x3]
         print(values)
 
     def vis(self):
@@ -25,21 +30,41 @@ class vector3:
         values = [self.x1, self.x2, self.x3]
         return values
 
+
 class line3:
     def __init__(self, sV, dV):
         self.supportV = sV
         self.dirV = dV
 
     def point(self, r):
+        """
+        gets a point at the line
+        :param r: real number
+        :return: returns point as a vector3
+        """
         newDirV = multiplyVektor3(self.dirV, r)
         xV = addVector3(self.supportV, newDirV)
         return xV
 
     def print(self):
+        """
+        prints the line to visualize
+        e.g.:
+
+        g: x-> = [1, 3, 2] + r * [2, 1, 5]
+
+        :return: none
+        """
         txt = f"g: x-> = {self.supportV.vis()} + r * {self.dirV.vis()}"
         print(txt)
 
+
 class plane3:
+    """
+    does a 3d  plane input one of the 3 ways to doc a plane and
+    it fills the other two
+    """
+
     def __init__(self, paramPlane, normalPlane, coordPlane):
         self.param = paramPlane
         self.normal = normalPlane
@@ -48,24 +73,40 @@ class plane3:
         self.getForms()
 
     def getParam(self):
+        """
+        gets the param form of the plane
+        :return: parameter form
+        """
         if self.normal != None:
             self.param = self.normal.paramForm()
         elif self.coord != None:
             self.param = self.coord.paramForm()
 
     def getNormal(self):
+        """
+        gets Normal form of the plane
+        :return: normal form
+        """
         if self.param != None:
             self.normal = self.param.normalForm()
         elif self.coord != None:
             self.normal = self.coord.normalForm()
 
     def getCoord(self):
+        """
+        gets the coordinate form
+        :return: coordinate form
+        """
         if self.param != None:
             self.coord = self.param.coordForm()
         elif self.normal != None:
             self.coord = self.normal.coordForm()
 
     def getForms(self):
+        """
+        gets the missing forms
+        :return:
+        """
         if self.param != None and self.normal != None and self.coord != None:
             return
 
@@ -85,12 +126,17 @@ class plane3:
             self.getNormal()
 
     def print(self):
+        """
+        prints the planes to visualize
+        :return: none - console out
+        """
         if self.param == None and self.normal == None and self.coord == None:
             print(0)
         else:
             self.param.print()
             self.normal.print()
             self.coord.print()
+
 
 class plane3param:
     def __init__(self, supportV3, clampingA, clampingB):
@@ -157,6 +203,7 @@ class plane3param:
 
         print(f"x-> = {support.vis()} + r * {clampA.vis()} + s * {clampB.vis()}")
 
+
 class plane3coord:
     def __init__(self, x1, x2, x3, n):
         """
@@ -172,6 +219,10 @@ class plane3coord:
         self.n = n
 
     def normalForm(self):
+        """
+        gets the normal form
+        :return: normal form
+        """
         n1 = self.x1
         n2 = self.x2
         n3 = self.x3
@@ -194,6 +245,10 @@ class plane3coord:
         return normalPlane
 
     def paramForm(self):
+        """
+        gets the parameter form
+        :return: parameter form
+        """
         s1x1 = self.n / self.x1
         s2x2 = self.n / self.x2
         s3x3 = self.n / self.x3
@@ -209,7 +264,6 @@ class plane3coord:
 
         return coordForm
 
-
     def print(self):
         """
         prints the vector to visualize
@@ -219,6 +273,7 @@ class plane3coord:
         """
         out = f"({self.x1}x1) + ({self.x2}x2) + ({self.x3}x3) = {self.n}"
         print(out)
+
 
 class plane3normal:
     def __init__(self, nV, supportV):
@@ -246,6 +301,10 @@ class plane3normal:
         return paramForm
 
     def coordForm(self):
+        """
+        gets the coordinate form
+        :return: coordinate form
+        """
         coordX1 = self.n.x1
         coordX2 = self.n.x2
         coordX3 = self.n.x3
@@ -256,6 +315,10 @@ class plane3normal:
         return coordPlane
 
     def print(self):
+        """
+        prints the plane
+        :return:
+        """
         out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
         print(out)
 
@@ -269,6 +332,7 @@ def sumVector3(vX):
 
     vSum = math.sqrt(vX.x1 ** 2 + vX.x2 ** 2 + vX.x3 ** 2)
     return vSum
+
 
 def multiplyVektor3(vA, n):
     """
@@ -285,6 +349,7 @@ def multiplyVektor3(vA, n):
     vB = vector3(a1, a2, a3)
 
     return vB
+
 
 def calcVector3(vA, vB):
     """
@@ -304,6 +369,7 @@ def calcVector3(vA, vB):
     vC = vector3(c1, c2, c3)
 
     return vC
+
 
 def addVector3(vA, vB):
     """
@@ -325,6 +391,7 @@ def addVector3(vA, vB):
 
     return vC
 
+
 def dotProduct(vA, vB):
     """
     calculates the scalar product of two vector3´s
@@ -337,6 +404,7 @@ def dotProduct(vA, vB):
 
     dotP = (vA.x1 * vB.x1) + (vA.x2 * vB.x2) + (vA.x3 * vB.x3)
     return dotP
+
 
 def crossProduct(vA, vB):
     """
@@ -354,6 +422,7 @@ def crossProduct(vA, vB):
     vC = vector3(c1, c2, c3)
 
     return vC
+
 
 """
 credits to Bastian Lipka
