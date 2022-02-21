@@ -25,6 +25,20 @@ class vector3:
         values = [self.x1, self.x2, self.x3]
         return values
 
+class line3:
+    def __init__(self, sV, dV):
+        self.supportV = sV
+        self.dirV = dV
+
+    def point(self, r):
+        newDirV = multiplyVektor3(self.dirV, r)
+        xV = addVector3(self.supportV, newDirV)
+        return xV
+
+    def print(self):
+        txt = f"g: x-> = {self.supportV.vis()} + r * {self.dirV.vis()}"
+        print(txt)
+
 class plane3:
     def __init__(self, paramPlane, normalPlane, coordPlane):
         self.param = paramPlane
@@ -142,7 +156,6 @@ class plane3param:
         clampB = self.clampingB
 
         print(f"x-> = {support.vis()} + r * {clampA.vis()} + s * {clampB.vis()}")
-
 
 class plane3coord:
     def __init__(self, x1, x2, x3, n):
