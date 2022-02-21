@@ -47,6 +47,12 @@ def coordToParam():
     paramPlane = coordPlane.paramForm()
     paramPlane.print()
 
+def createLine():
+    supV = vector3(1, 3, 2)
+    dirV = vector3(2, 1, 5)
+    line = line3(supV, dirV)
+    line.print()
+    line.point(5).print()
 
 def main():
     #len vector calc
@@ -69,4 +75,4 @@ def main():
 
 
 if __name__ == '__main__':
-    plane()
+    createLine()
