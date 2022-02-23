@@ -54,6 +54,14 @@ def createLine():
     line.print()
     line.point(5).print()
 
+def testVector():
+    """
+    inverts the vector
+    :return:
+    """
+    aV = vector3(1, 4 ,2)
+    aV.invert().print()
+
 def main():
     #len vector calc
     vA = vector3(1, 5, 7)
@@ -75,4 +83,4 @@ def main():
 
 
 if __name__ == '__main__':
-    createLine()
+   testVector()
