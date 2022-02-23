@@ -20,6 +20,19 @@ class vector3:
         values = [self.x1, self.x2, self.x3]
         print(values)
 
+    def invert(self):
+        """
+        inverts the current vector, does not change the vector it self
+        :return:
+        """
+        x1 = -self.x1
+        x2 = -self.x2
+        x3 = -self.x3
+
+        newV = vector3(x1, x2, x3)
+        return newV
+
+
     def vis(self):
         """
         gets you the values of the vector as an array
