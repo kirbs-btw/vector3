@@ -335,6 +335,40 @@ class plane3normal:
         out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
         print(out)
 
+def compareLines(g1, g2):
+    # I     g1.sV.x1 + g1.dV.x1 = g2.sV.x1 + g2.dV.x1
+    # II    g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
+    # III   g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
+
+    # get the value of s
+    g1sVx1 = g1.supportV.x1 * g1.dirV.x2 - g1.supportV.x2 * g1.dirV.x1
+    g2sVx1 = g2.supportV.x1 * g1.dirV.x2 - g2.supportV.x2 * g1.dirV.x1
+    g2dVx1 = g2.dirV.x1 * g1.dirV.x2 - g2.dirV.x2 * g1.dirV.x1
+
+    g1sVx1 = (g1sVx1 - g2sVx1) / g2dVx1  # value of s
+    g2dVx1 = 1  # -->s
+
+    # get the value of r
+    g2x2 = (g2.supportV.x2 + g2.dirV.x2 * g1sVx1) - g1.supportV.x2
+    g2x2 = g2x2 / g1.dirV.x2  # value of r
+    g1dVx2 = 1  # -->r
+
+    # debug:
+    # print(f"r: {g2x2}")
+    # print(f"s: {g1sVx1}")
+    # g1.print()
+    # g2.print()
+
+    pointR = g1.point(g2x2)
+    pointS = g2.point(g1sVx1)
+
+    if pointR == pointS:
+        return pointR
+    else:
+        print(pointR.vis())
+        print(pointS.vis())
+        print("lines don´t cross")
+
 
 def sumVector3(vX):
     """
