@@ -81,6 +81,19 @@ def main():
 
     crossProduct(vA, vB).print()
 
+def lineCross():
+    lAVa = vector3(3, 4, 1)
+    lAVb = vector3(2, 1, 3)
+
+    lineA = line3(lAVa, lAVb)
+
+    lBVa = vector3(1, 2, 3)
+    lBVb = vector3(5, 3, 2)
+
+    lineB = line3(lBVa, lBVb)
+
+    compareLines(lineA, lineB)
+
 
 if __name__ == '__main__':
-   testVector()
+   lineCross()
