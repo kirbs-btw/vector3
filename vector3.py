@@ -335,6 +335,20 @@ class plane3normal:
         out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
         print(out)
 
+def unitVector3(vA):
+    """
+    calculates the unit Vector 
+
+    :param vA: vector A
+    :return: unit vector of A (return vector has len 1)
+    """
+    vectorLen = sumVector3(vA)
+    multi = 1 / vectorLen
+    print(multi)
+    return multiplyVektor3(vA, multi)
+
+
+
 def compareLines(g1, g2):
     # I     g1.sV.x1 + g1.dV.x1 = g2.sV.x1 + g2.dV.x1
     # II    g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
