@@ -94,6 +94,9 @@ def lineCross():
 
     compareLines(lineA, lineB)
 
+def unitV():
+    vA = vector3(2, 4, 4)
+    unitVector3(vA).print()
 
 if __name__ == '__main__':
-   lineCross()
+   unitV()
