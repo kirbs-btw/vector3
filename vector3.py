@@ -55,7 +55,7 @@ class line3:
         :param r: real number
         :return: returns point as a vector3
         """
-        newDirV = multiplyVektor3(self.dirV, r)
+        newDirV = multiplyVector3(self.dirV, r)
         xV = addVector3(self.supportV, newDirV)
         return xV
 
@@ -166,8 +166,8 @@ class plane3param:
         :return: the vector of the point on the plane
         """
 
-        r3 = multiplyVektor3(self.clampingA, r)
-        s3 = multiplyVektor3(self.clampingB, s)
+        r3 = multiplyVector3(self.clampingA, r)
+        s3 = multiplyVector3(self.clampingB, s)
 
         return addVector3(addVector3(self.supportV, r3), s3)
 
@@ -335,9 +335,29 @@ class plane3normal:
         out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
         print(out)
 
+def midVector3(vA, vB):
+    """
+    returns the mid point of two vectors
+    :param vA: vector A - type = vector3
+    :param vB: vector B - type = vector3
+    :return: mit point of vA and vB as a vector3s
+    """
+
+    vM = multiplyVector3(addVector3(vA, vB), 0.5)
+    return vM
+
+def point3plane(vA, vB, vC):
+    supportV = vA
+    clampA = calcVector3(vA, vB)
+    clampB = calcVector3(vA, vC)
+
+    plane3 = plane3param(supportV, clampA, clampB)
+
+    return plane3
+
 def unitVector3(vA):
     """
-    calculates the unit Vector 
+    calculates the unit Vector
 
     :param vA: vector A
     :return: unit vector of A (return vector has len 1)
@@ -345,7 +365,7 @@ def unitVector3(vA):
     vectorLen = sumVector3(vA)
     multi = 1 / vectorLen
     print(multi)
-    return multiplyVektor3(vA, multi)
+    return multiplyVector3(vA, multi)
 
 
 
@@ -395,7 +415,7 @@ def sumVector3(vX):
     return vSum
 
 
-def multiplyVektor3(vA, n):
+def multiplyVector3(vA, n):
     """
     multiply vector with number
     returns new vector does not deform old one
