@@ -62,6 +62,24 @@ def testVector():
     aV = vector3(1, 4 ,2)
     aV.invert().print()
 
+def testMidandPointPlane():
+    # mid point test
+    vA = vector3(1, 3, 4)
+    vB = vector3(2, 3, 1)
+
+    vC = midVector3(vA, vB)
+    vC.print()
+
+    print("\n")
+
+    # 3point plane test
+    pointA = vector3(1, 2, 3)
+    pointB = vector3(0, 5, 2)
+    pointC = vector3(2, 1, 0)
+
+    plane = point3plane(pointA, pointB, pointC)
+    plane.print()
+
 def main():
     #len vector calc
     vA = vector3(1, 5, 7)
@@ -99,4 +117,4 @@ def unitV():
     unitVector3(vA).print()
 
 if __name__ == '__main__':
-   unitV()
+   testMidandPointPlane()
