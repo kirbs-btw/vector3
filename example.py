@@ -114,7 +114,18 @@ def lineCross():
 
 def unitV():
     vA = vector3(2, 4, 4)
-    unitVector3(vA).print()
+    vB = vA.unit().print()
 
 if __name__ == '__main__':
-   testMidandPointPlane()
+   #testMidandPointPlane()
+   #doPlaneParam()
+   #doPlaneNormal()
+   #coordtoNormal()
+   #plane()
+   #coordToParam()
+   #createLine()
+   #testVector()
+   #testMidandPointPlane()
+   #main()
+   #lineCross()
+   unitV()
