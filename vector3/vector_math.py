@@ -5,7 +5,7 @@ class vector3:
     creates 3d Vectors in python
     """
 
-    def __init__(self, x1, x2, x3):
+    def __init__(self, x1=0, x2=0, x3=0):
         self.x1 = x1
         self.x2 = x2
         self.x3 = x3
@@ -55,13 +55,225 @@ class vector3:
         values = [self.x1, self.x2, self.x3]
         return values
 
+
+
+class plane3param:
+    def __init__(self, supportV3=vector3(), clampingA=vector3(), clampingB=vector3()):
+        self.supportV = supportV3
+        self.clampingA = clampingA
+        self.clampingB = clampingB
+
+    def point(self, r, s):
+        """
+        gets you a point at the plane in form of a vector 3
+        to get the values printed type a .print() after your var
+        :param r: value r --> real Number
+        :param s: value s --> real Number
+        :return: the vector of the point on the plane
+        """
+
+        r3 = multiplyVector3(self.clampingA, r)
+        s3 = multiplyVector3(self.clampingB, s)
+
+        return addVector3(addVector3(self.supportV, r3), s3)
+
+    def normalVector(self):
+        """
+        does the cross product of clampingA and clampingB to get the
+        normal vector
+        :return: normal Vector of the plane
+        """
+        return crossProduct(self.clampingA, self.clampingB)
+
+    def coordForm(self):
+        """
+        returns the coord Form of the plane
+        :return: coord form of the plane
+        """
+
+        normalV = self.normalVector()
+        n = -dotProduct(normalV, self.supportV)
+
+        coordPlane = plane3coord(normalV.x1, normalV.x2, normalV.x3, n)
+        return coordPlane
+
+    def normalForm(self):
+        """
+        returns the normal form of the plane
+        :return: normal form of the plane
+        """
+        n = self.normalVector()
+
+        normPlane3 = plane3normal(n, self.supportV)
+        return normPlane3
+
+    def print(self):
+        """
+        prints the param form of the plane to vis for debug
+
+        e.g.
+        x-> = [2, 5, 1] + r * [0, 6, -5] + s * [5, -1, 0]
+
+        :return:
+        """
+        support = self.supportV
+        clampA = self.clampingA
+        clampB = self.clampingB
+
+        print(f"x-> = {support.vis()} + r * {clampA.vis()} + s * {clampB.vis()}")
+
+class plane3coord:
+    def __init__(self, x1=0, x2=0, x3=0, n=0):
+        """
+        x1 + x2 + x3 = n
+        :param x1:
+        :param x2:
+        :param x3:
+        :param n:
+        """
+        self.x1 = x1
+        self.x2 = x2
+        self.x3 = x3
+        self.n = n
+
+    def normalForm(self):
+        """
+        gets the normal form
+        :return: normal form
+        """
+        n1 = self.x1
+        n2 = self.x2
+        n3 = self.x3
+        nV = vector3(n1, n2, n3)
+
+        s1 = 0
+        s2 = 0
+        s3 = 0
+
+        if self.x3 != 0:
+            s3 = self.n / self.x3
+        elif self.x2 != 0:
+            s2 = self.n / self.x2
+        else:
+            s1 = self.n / self.x1
+
+        supportV = vector3(s1, s2, s3)
+        normalPlane = plane3normal(nV, supportV)
+
+        return normalPlane
+
+    def paramForm(self):
+        """
+        gets the parameter form
+        :return: parameter form
+        """
+        s1x1 = self.n / self.x1
+        s2x2 = self.n / self.x2
+        s3x3 = self.n / self.x3
+
+        s1V = vector3(s1x1, 0, 0)
+        s2V = vector3(0, s2x2, 0)
+        s3V = vector3(0, 0, s3x3)
+
+        clampA = calcVector3(s1V, s2V)
+        clampB = calcVector3(s1V, s3V)
+
+        coordForm = plane3param(s1V, clampA, clampB)
+
+        return coordForm
+
+    def print(self):
+        """
+        prints the vector to visualize
+        e.g.:
+        (5x1) + (-7x2) + (1x3) = 18
+        :return:
+        """
+        out = f"({self.x1}x1) + ({self.x2}x2) + ({self.x3}x3) = {self.n}"
+        print(out)
+
+class plane3normal:
+    def __init__(self, nV=vector3(), supportV=vector3()):
+        self.n = nV
+        self.supportV = supportV
+
+    def paramForm(self):
+        """
+        converts Normal plane to param plane
+        :return: returns new param plane
+        """
+
+        clampAx1 = 0
+        clampAx2 = self.n.x3
+        clampAx3 = -self.n.x2
+
+        clampBx1 = self.n.x2
+        clampBx2 = -self.n.x1
+        clampBx3 = 0
+
+        clampA = vector3(clampAx1, clampAx2, clampAx3)
+        clampB = vector3(clampBx1, clampBx2, clampBx3)
+
+        paramForm = plane3param(self.supportV, clampA, clampB)
+        return paramForm
+
+    def coordForm(self):
+        """
+        gets the coordinate form
+        :return: coordinate form
+        """
+        coordX1 = self.n.x1
+        coordX2 = self.n.x2
+        coordX3 = self.n.x3
+        n = dotProduct(self.n, self.supportV)
+
+        coordPlane = plane3coord(coordX1, coordX2, coordX3, n)
+
+        return coordPlane
+
+    def print(self):
+        """
+        prints the plane
+        :return:
+        """
+        out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
+        print(out)
+
+
+class line3:
+    def __init__(self, sV=vector3(), dV=vector3()):
+        self.supportV = sV
+        self.dirV = dV
+
+    def point(self, r):
+        """
+        gets a point at the line
+        :param r: real number
+        :return: returns point as a vector3
+        """
+        newDirV = multiplyVector3(self.dirV, r)
+        xV = addVector3(self.supportV, newDirV)
+        return xV
+
+    def print(self):
+        """
+        prints the line to visualize
+        e.g.:
+
+        g: x-> = [1, 3, 2] + r * [2, 1, 5]
+
+        :return: none
+        """
+        txt = f"g: x-> = {self.supportV.vis()} + r * {self.dirV.vis()}"
+        print(txt)
+
 class plane3:
     """
     does a 3d  plane input one of the 3 ways to doc a plane and
     it fills the other two
     """
 
-    def __init__(self, paramPlane, normalPlane, coordPlane):
+    def __init__(self, paramPlane=plane3param(), normalPlane=plane3normal(), coordPlane=plane3coord()):
         self.param = paramPlane
         self.normal = normalPlane
         self.coord = coordPlane
@@ -132,218 +344,6 @@ class plane3:
             self.param.print()
             self.normal.print()
             self.coord.print()
-
-class plane3param:
-    def __init__(self, supportV3, clampingA, clampingB):
-        self.supportV = supportV3
-        self.clampingA = clampingA
-        self.clampingB = clampingB
-
-    def point(self, r, s):
-        """
-        gets you a point at the plane in form of a vector 3
-        to get the values printed type a .print() after your var
-        :param r: value r --> real Number
-        :param s: value s --> real Number
-        :return: the vector of the point on the plane
-        """
-
-        r3 = multiplyVector3(self.clampingA, r)
-        s3 = multiplyVector3(self.clampingB, s)
-
-        return addVector3(addVector3(self.supportV, r3), s3)
-
-    def normalVector(self):
-        """
-        does the cross product of clampingA and clampingB to get the
-        normal vector
-        :return: normal Vector of the plane
-        """
-        return crossProduct(self.clampingA, self.clampingB)
-
-    def coordForm(self):
-        """
-        returns the coord Form of the plane
-        :return: coord form of the plane
-        """
-
-        normalV = self.normalVector()
-        n = -dotProduct(normalV, self.supportV)
-
-        coordPlane = plane3coord(normalV.x1, normalV.x2, normalV.x3, n)
-        return coordPlane
-
-    def normalForm(self):
-        """
-        returns the normal form of the plane
-        :return: normal form of the plane
-        """
-        n = self.normalVector()
-
-        normPlane3 = plane3normal(n, self.supportV)
-        return normPlane3
-
-    def print(self):
-        """
-        prints the param form of the plane to vis for debug
-
-        e.g.
-        x-> = [2, 5, 1] + r * [0, 6, -5] + s * [5, -1, 0]
-
-        :return:
-        """
-        support = self.supportV
-        clampA = self.clampingA
-        clampB = self.clampingB
-
-        print(f"x-> = {support.vis()} + r * {clampA.vis()} + s * {clampB.vis()}")
-
-class plane3coord:
-    def __init__(self, x1, x2, x3, n):
-        """
-        x1 + x2 + x3 = n
-        :param x1:
-        :param x2:
-        :param x3:
-        :param n:
-        """
-        self.x1 = x1
-        self.x2 = x2
-        self.x3 = x3
-        self.n = n
-
-    def normalForm(self):
-        """
-        gets the normal form
-        :return: normal form
-        """
-        n1 = self.x1
-        n2 = self.x2
-        n3 = self.x3
-        nV = vector3(n1, n2, n3)
-
-        s1 = 0
-        s2 = 0
-        s3 = 0
-
-        if self.x3 != 0:
-            s3 = self.n / self.x3
-        elif self.x2 != 0:
-            s2 = self.n / self.x2
-        else:
-            s1 = self.n / self.x1
-
-        supportV = vector3(s1, s2, s3)
-        normalPlane = plane3normal(nV, supportV)
-
-        return normalPlane
-
-    def paramForm(self):
-        """
-        gets the parameter form
-        :return: parameter form
-        """
-        s1x1 = self.n / self.x1
-        s2x2 = self.n / self.x2
-        s3x3 = self.n / self.x3
-
-        s1V = vector3(s1x1, 0, 0)
-        s2V = vector3(0, s2x2, 0)
-        s3V = vector3(0, 0, s3x3)
-
-        clampA = calcVector3(s1V, s2V)
-        clampB = calcVector3(s1V, s3V)
-
-        coordForm = plane3param(s1V, clampA, clampB)
-
-        return coordForm
-
-    def print(self):
-        """
-        prints the vector to visualize
-        e.g.:
-        (5x1) + (-7x2) + (1x3) = 18
-        :return:
-        """
-        out = f"({self.x1}x1) + ({self.x2}x2) + ({self.x3}x3) = {self.n}"
-        print(out)
-
-class plane3normal:
-    def __init__(self, nV, supportV):
-        self.n = nV
-        self.supportV = supportV
-
-    def paramForm(self):
-        """
-        converts Normal plane to param plane
-        :return: returns new param plane
-        """
-
-        clampAx1 = 0
-        clampAx2 = self.n.x3
-        clampAx3 = -self.n.x2
-
-        clampBx1 = self.n.x2
-        clampBx2 = -self.n.x1
-        clampBx3 = 0
-
-        clampA = vector3(clampAx1, clampAx2, clampAx3)
-        clampB = vector3(clampBx1, clampBx2, clampBx3)
-
-        paramForm = plane3param(self.supportV, clampA, clampB)
-        return paramForm
-
-    def coordForm(self):
-        """
-        gets the coordinate form
-        :return: coordinate form
-        """
-        coordX1 = self.n.x1
-        coordX2 = self.n.x2
-        coordX3 = self.n.x3
-        n = dotProduct(self.n, self.supportV)
-
-        coordPlane = plane3coord(coordX1, coordX2, coordX3, n)
-
-        return coordPlane
-
-    def print(self):
-        """
-        prints the plane
-        :return:
-        """
-        out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
-        print(out)
-
-
-class line3:
-    def __init__(self, sV, dV):
-        self.supportV = sV
-        self.dirV = dV
-
-    def point(self, r):
-        """
-        gets a point at the line
-        :param r: real number
-        :return: returns point as a vector3
-        """
-        newDirV = multiplyVector3(self.dirV, r)
-        xV = addVector3(self.supportV, newDirV)
-        return xV
-
-    def print(self):
-        """
-        prints the line to visualize
-        e.g.:
-
-        g: x-> = [1, 3, 2] + r * [2, 1, 5]
-
-        :return: none
-        """
-        txt = f"g: x-> = {self.supportV.vis()} + r * {self.dirV.vis()}"
-        print(txt)
-
-
 
 def midVector3(vA, vB):
     """
