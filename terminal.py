@@ -69,6 +69,21 @@ def checkInput(line):
         nameArr = getNames(names)
         doCalc(nameArr, "cross")
 
+    if re.search("^calc ", line):
+        names = re.sub("^calc ", "", line)
+        nameArr = getNames(names)
+        doCalc(nameArr, "calc")
+
+    if re.search("^len ", line):
+        name = re.sub("^len ", "", line)
+        names = [name, ""]
+        doCalc(names, "len")
+
+    if re.search("^unit ", line):
+        name = re.sub("^unit ", "", line)
+        names = [name, ""]
+        doCalc(names, "unit")
+
 def doCalc(arr, method):
     vA = ram.get(arr[0])
     vB = ram.get(arr[1])
@@ -80,6 +95,12 @@ def doCalc(arr, method):
         resultV = vector3.crossProduct(vA, vB)
     elif method == "add":
         resultV = vector3.addVector3(vA, vB)
+    elif method == "calc":
+        resultV = vector3.calcVector3(vA, vB)
+    elif method == "len":
+        resultNum = vector3.sumVector3(vA)
+    elif method == "unit":
+        resultV = vA.unit()
 
     if resultV != None:
         resultV.print()
@@ -141,7 +162,22 @@ def convertValues(line):
         else:
             c += str(i)
 
-    values = [int(a), int(b), int(c)]
+    if float(a) % 1 == 0:
+        a = int(a)
+    else:
+        a = float(a)
+
+    if float(b) % 1 == 0:
+        b = int(b)
+    else:
+        b = float(b)
+
+    if float(c) % 1 == 0:
+        c = int(c)
+    else:
+        c = float(c)
+
+    values = [a, b, c]
 
     return values
 
