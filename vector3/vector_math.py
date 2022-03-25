@@ -28,7 +28,7 @@ class vector3:
         """
         vectorLen = sumVector3(self)
         multi = 1 / vectorLen
-        print(multi)
+        #print(multi)
 
         return multiplyVector3(self, multi)
 
