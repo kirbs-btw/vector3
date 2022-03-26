@@ -40,8 +40,11 @@ ram = vectorRAM()
 run = run()
 
 def checkInput(line):
+    # ideas
+    # add help function
+    #   -> gets you all possible actions
+
     if line == "":
-        #print("No Input")
         return
 
     if line.lower() == "stop":
@@ -84,6 +87,16 @@ def checkInput(line):
         names = [name, ""]
         doCalc(names, "unit")
 
+    if re.search("^dot ", line):
+        names = re.sub("^dot ", "", line)
+        nameArr = getNames(names)
+        doCalc(nameArr, "dot")
+
+    if re.search("^mid ", line):
+        names = re.sub("^mid ", "", line)
+        nameArr = getNames(names)
+        doCalc(nameArr, "mid")
+
 def doCalc(arr, method):
     vA = ram.get(arr[0])
     vB = ram.get(arr[1])
@@ -101,6 +114,12 @@ def doCalc(arr, method):
         resultNum = vector3.sumVector3(vA)
     elif method == "unit":
         resultV = vA.unit()
+    elif method == "dot":
+        resultNum = vector3.dotProduct(vA, vB)
+    elif method == "mid":
+        resultV = vector3.midVector3(vA, vB)
+    else:
+        print("Something went wrong")
 
     if resultV != None:
         resultV.print()
