@@ -40,15 +40,15 @@ ram = vectorRAM()
 run = run()
 
 def checkInput(line):
-    # ideas
-    # add help function
-    #   -> gets you all possible actions
 
     if line == "":
         return
 
     if line.lower() == "stop":
         run.r = False
+
+    if line.lower() == "/help":
+        helpFunc()
 
     if re.search(" = vector3$", line):
         name = re.sub(" = vector3", "", line)
@@ -125,6 +125,55 @@ def doCalc(arr, method):
         resultV.print()
     elif resultNum != None:
         print(resultNum)
+
+def helpFunc():
+    text = "\n" \
+           "Hello you called the /help function :)\n" \
+           "Here are all functions explained!\n" \
+           "we hope it helps\n" \
+           "\n" \
+           "To generate a vector3 type:\n" \
+           "    name = vector3\n" \
+           "\n" \
+           "    to add values:\n" \
+           "    name = 0, 0, 0\n" \
+           "\n" \
+           "cross:\n" \
+           "    returns the cross product of the two vectors use it like\n" \
+           "    cross nameVectorA nameVectorB\n" \
+           "\n" \
+           "add:\n" \
+           "    returns the result of adding two vectors\n" \
+           "    add nameVectorA nameVectorB\n" \
+           "\n" \
+           "calc:\n" \
+           "    returns the vector between two vectors\n" \
+           "    the first vectors is the start point\n" \
+           "    the second the end point\n" \
+           "use like this:\n" \
+           "    calc nameVectorA nameVectorB\n" \
+           "\n" \
+           "len:\n" \
+           "    returns the length of a vector\n" \
+           "    len nameVector\n" \
+           "\n" \
+           "unit:\n" \
+           "    returns the unit vector of the vector\n" \
+           "    unit nameVector\n" \
+           "\n" \
+           "dot:\n" \
+           "    returns dot product of two vectors\n" \
+           "    dot nameVectorA nameVectorB\n" \
+           "\n" \
+           "mid:\n" \
+           "    returns the mid point of two vectors\n" \
+           "    mid nameVectorA nameVectorB\n"
+
+    print(text)
+
+
+
+    pass
 
 def getNames(line):
     nameA = ""
@@ -211,6 +260,15 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+ideas: 
+    -entry function
+        -showing the basic things
+    -implement planes
+    -implement lines
+    -documentation
+"""
 
 """
 Bastian Lipka 
