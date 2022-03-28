@@ -54,6 +54,10 @@ def checkInput(line):
         name = re.sub(" = vector3", "", line)
         ram.appendV(vector3.vector3(), name)
 
+    if re.search(" = plane3", line):
+        name = re.sub(" = plane3", "", line)
+        ram.appendV(vector3.plane3(), name)
+
     if re.search("^print ", line):
         name = re.sub("print ", "", line)
         ram.get(name).print()
@@ -268,6 +272,8 @@ ideas:
     -implement planes
     -implement lines
     -documentation
+    -change append function naming 
+    -change output of plane3
 """
 
 """
