@@ -27,11 +27,6 @@ def doPlaneNormal():
     coordForm = normalPlane.coordForm()
     coordForm.print()
 
-    #paramForm = normalPlane.paramForm()
-    #paramForm.print()
-    #newNormal = paramForm.normalForm()
-    #newNormal.print()
-
 def coordtoNormal():
     coordPlane = plane3coord(1, 4, 5, 2)
     normalPlane = coordPlane.normalForm()
@@ -57,7 +52,7 @@ def createLine():
 def testVector():
     """
     inverts the vector
-    :return:
+    :return: None
     """
     aV = vector3(1, 4 ,2)
     aV.invert().print()
@@ -116,6 +111,10 @@ def unitV():
     vA = vector3(2, 4, 4)
     vB = vA.unit().print()
 
+def v3Test():
+    vA = vector3(1)
+    vA.print()
+
 if __name__ == '__main__':
    #testMidandPointPlane()
    #doPlaneParam()
@@ -128,4 +127,5 @@ if __name__ == '__main__':
    #testMidandPointPlane()
    #main()
    #lineCross()
-   unitV()
+   #unitV()
+   v3Test()
