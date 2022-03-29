@@ -120,7 +120,7 @@ class plane3param:
         clampA = self.clampingA
         clampB = self.clampingB
 
-        print(f"x-> = {support.vis()} + r * {clampA.vis()} + s * {clampB.vis()}")
+        print(f"param-form:          x-> = {support.vis()} + r * {clampA.vis()} + s * {clampB.vis()}")
 
 class plane3coord:
     def __init__(self, x1=0, x2=0, x3=0, n=0):
@@ -189,7 +189,7 @@ class plane3coord:
         (5x1) + (-7x2) + (1x3) = 18
         :return:
         """
-        out = f"({self.x1}x1) + ({self.x2}x2) + ({self.x3}x3) = {self.n}"
+        out = f"coord-form:         ({self.x1}x1) + ({self.x2}x2) + ({self.x3}x3) = {self.n}"
         print(out)
 
 class plane3normal:
@@ -236,7 +236,7 @@ class plane3normal:
         prints the plane
         :return:
         """
-        out = f"{self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
+        out = f"normal-form:        {self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
         print(out)
 
 
