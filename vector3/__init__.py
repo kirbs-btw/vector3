@@ -1,4 +1,4 @@
-__version__ = "1.5.6"
+__version__ = "1.5.6.1"
 
 import math
 from .vector_math import (midVector3 as midVector3,
