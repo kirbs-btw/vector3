@@ -9,8 +9,8 @@ class vectorRAM():
     def __init__(self):
         self.ram = []
 
-    def appendV(self, vector, vectorName):
-        self.ram.append([vectorName, vector])
+    def append(self, item, name):
+        self.ram.append([name, item])
 
     def get(self, name):
         vector = vector3.vector3()
@@ -52,11 +52,11 @@ def checkInput(line):
 
     if re.search(" = vector3$", line):
         name = re.sub(" = vector3", "", line)
-        ram.appendV(vector3.vector3(), name)
+        ram.append(vector3.vector3(), name)
 
     if re.search(" = plane3", line):
         name = re.sub(" = plane3", "", line)
-        ram.appendV(vector3.plane3(), name)
+        ram.append(vector3.plane3(), name)
 
     if re.search("^print ", line):
         name = re.sub("print ", "", line)
@@ -269,11 +269,10 @@ if __name__ == '__main__':
 ideas: 
     -entry function
         -showing the basic things
-    -implement planes
+        
+    (-implement planes)
     -implement lines
     -documentation
-    -change append function naming 
-    -change output of plane3
 """
 
 """
