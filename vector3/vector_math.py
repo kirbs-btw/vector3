@@ -273,12 +273,27 @@ class plane3:
     it fills the other two
     """
 
-    def __init__(self, paramPlane=plane3param(), normalPlane=plane3normal(), coordPlane=plane3coord()):
-        self.param = paramPlane
-        self.normal = normalPlane
-        self.coord = coordPlane
-
+    def __init__(self, paramPlane=None, normalPlane=None, coordPlane=None):
+        self.assignInputs(paramPlane, normalPlane, coordPlane)
         self.getForms()
+
+    def assignInputs(self, planeA, planeB, planeC):
+        if type(planeA) == type(plane3coord()):
+            planeA, planeC = planeC, planeA
+        if type(planeA) == type(plane3normal()):
+            planeA, planeB = planeB, planeA
+        if type(planeB) == type(plane3param):
+            planeB, planeA = planeA, planeB
+        if type(planeB) == type(plane3coord):
+            planeB, planeC = planeC, planeB
+        if type(planeC) == type(plane3param()):
+            planeC, planeA = planeA, planeC
+        if type(planeC) == type(plane3normal()):
+            planeC, planeB = planeB, planeC
+
+        self.param = planeA
+        self.normal = planeB
+        self.coord = planeC
 
     def getParam(self):
         """
