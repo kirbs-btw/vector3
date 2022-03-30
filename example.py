@@ -115,6 +115,11 @@ def v3Test():
     vA = vector3(1)
     vA.print()
 
+def testPlaneNew():
+    planeCoord = plane3coord(1, 2, 3, 4)
+    plane = plane3(planeCoord)
+    plane.print()
+
 if __name__ == '__main__':
    #testMidandPointPlane()
    #doPlaneParam()
@@ -128,4 +133,5 @@ if __name__ == '__main__':
    #main()
    #lineCross()
    #unitV()
-   v3Test()
+   #v3Test()
+   testPlaneNew()
