@@ -46,7 +46,6 @@ class ComplexLine:
         self.lower_z_bound = 0
         self.higher_z_bound = 0
         
-        
         self.calcVar(v1, v2)
         
     def calcVar(self, v1, v2):
