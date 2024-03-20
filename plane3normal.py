@@ -1,5 +1,5 @@
 class plane3normal:
-    def __init__(self, nV=vector3(), supportV=vector3()):
+    def __init__(self, nV, supportV):
         self.n = nV
         self.supportV = supportV
 
@@ -10,11 +10,11 @@ class plane3normal:
         """
 
         clampAx1 = 0
-        clampAx2 = self.n.x3
-        clampAx3 = -self.n.x2
+        clampAx2 = self.n[2]
+        clampAx3 = -self.n[1]
 
-        clampBx1 = self.n.x2
-        clampBx2 = -self.n.x1
+        clampBx1 = self.n[1]
+        clampBx2 = -self.n[0]
         clampBx3 = 0
 
         clampA = vector3(clampAx1, clampAx2, clampAx3)
@@ -28,9 +28,9 @@ class plane3normal:
         gets the coordinate form
         :return: coordinate form
         """
-        coordX1 = self.n.x1
-        coordX2 = self.n.x2
-        coordX3 = self.n.x3
+        coordX1 = self.n[0]
+        coordX2 = self.n[1]
+        coordX3 = self.n[2]
         n = dotProduct(self.n, self.supportV)
 
         coordPlane = plane3coord(coordX1, coordX2, coordX3, n)
@@ -42,5 +42,5 @@ class plane3normal:
         prints the plane
         :return:
         """
-        out = f"normal-form:        {self.n.vis()} * (xV - {self.supportV.vis()}) = 0"
+        out = f"normal-form:        {self.n} * (xV - {self.supportV}) = 0"
         print(out)

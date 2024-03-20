@@ -7,8 +7,8 @@ class plane3coord:
         :param x3:
         :param n:
         """
-        self.x1 = x1
-        self.x2 = x2
+        self[0] = x1
+        self[1] = x2
         self.x3 = x3
         self.n = n
 
@@ -17,21 +17,21 @@ class plane3coord:
         gets the normal form
         :return: normal form
         """
-        n1 = self.x1
-        n2 = self.x2
-        n3 = self.x3
-        nV = vector3(n1, n2, n3)
+        n1 = self[0]
+        n2 = self[1]
+        n3 = self[2]
+        nV = [n1, n2, n3]
 
         s1 = 0
         s2 = 0
         s3 = 0
 
-        if self.x3 != 0:
-            s3 = self.n / self.x3
-        elif self.x2 != 0:
-            s2 = self.n / self.x2
+        if self[2] != 0:
+            s3 = self.n / self[2]
+        elif self[1] != 0:
+            s2 = self.n / self[1]
         else:
-            s1 = self.n / self.x1
+            s1 = self.n / self[0]
 
         supportV = vector3(s1, s2, s3)
         normalPlane = plane3normal(nV, supportV)
@@ -43,14 +43,14 @@ class plane3coord:
         gets the parameter form
         :return: parameter form
         """
-        s1x1 = self.n / self.x1
-        s2x2 = self.n / self.x2
-        s3x3 = self.n / self.x3
+        s1x1 = self.n / self[0]
+        s2x2 = self.n / self[1]
+        s3x3 = self.n / self[2]
 
-        s1V = vector3(s1x1, 0, 0)
-        s2V = vector3(0, s2x2, 0)
-        s3V = vector3(0, 0, s3x3)
-
+        s1V = [s1x1, 0, 0]
+        s2V = [0, s2x2, 0]
+        s3V = [0, 0, s3x3]
+        
         clampA = calcVector3(s1V, s2V)
         clampB = calcVector3(s1V, s3V)
 
@@ -65,5 +65,5 @@ class plane3coord:
         (5x1) + (-7x2) + (1x3) = 18
         :return:
         """
-        out = f"coord-form:         ({self.x1}x1) + ({self.x2}x2) + ({self.x3}x3) = {self.n}"
+        out = f"coord-form:         ({self[0]}x1) + ({self[1]}x2) + ({self[2]}x3) = {self.n}"
         print(out)
