@@ -1,5 +1,29 @@
 import math
 
+def unit(v):
+        """
+        calculates the unit Vector
+
+        :param vA: vector A
+        :return: unit vector of A (return vector has len 1)
+        """
+        vectorLen = sumVector3(v)
+        multi = 1 / vectorLen
+
+        return multiplyVector3(v, multi)
+
+def invert(v):
+    """
+    inverts the current vector, does not change the vector it self
+    :return:
+    """
+    x1 = -v[0]
+    x2 = -v[1]
+    x3 = -v[2]
+
+    newV = [x1, x2, x3]
+    return newV
+
 def midVector3(vA, vB):
     """
     returns the mid point of two vectors
@@ -27,15 +51,15 @@ def compareLines(g1, g2):
     # III   g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
 
     # get the value of s
-    g1sVx1 = g1.supportV.x1 * g1.dirV.x2 - g1.supportV.x2 * g1.dirV.x1
-    g2sVx1 = g2.supportV.x1 * g1.dirV.x2 - g2.supportV.x2 * g1.dirV.x1
-    g2dVx1 = g2.dirV.x1 * g1.dirV.x2 - g2.dirV.x2 * g1.dirV.x1
+    g1sVx1 = g1.supportV[0] * g1.dirV[1] - g1.supportV[1] * g1.dirV[0]
+    g2sVx1 = g2.supportV[0] * g1.dirV[1] - g2.supportV[1] * g1.dirV[0]
+    g2dVx1 = g2.dirV[0] * g1.dirV[1] - g2.dirV[1] * g1.dirV[0]
 
     g1sVx1 = (g1sVx1 - g2sVx1) / g2dVx1  # value of s
 
     # get the value of r
-    g2x2 = (g2.supportV.x2 + g2.dirV.x2 * g1sVx1) - g1.supportV.x2
-    g2x2 = g2x2 / g1.dirV.x2  # value of r
+    g2x2 = (g2.supportV[1] + g2.dirV[1] * g1sVx1) - g1.supportV[1]
+    g2x2 = g2x2 / g1.dirV[1]  # value of r
 
     pointR = g1.point(g2x2)
     pointS = g2.point(g1sVx1)
@@ -43,9 +67,7 @@ def compareLines(g1, g2):
     if pointR == pointS:
         return pointR
     else:
-        print(pointR.vis())
-        print(pointS.vis())
-        print("lines don´t cross")
+        # "lines don´t cross 
         return None
 
 
@@ -56,7 +78,7 @@ def sumVector3(vX):
     :return: a real number
     """
 
-    vSum = math.sqrt(vX.x1 ** 2 + vX.x2 ** 2 + vX.x3 ** 2)
+    vSum = math.sqrt(vX[1] ** 2 + vX[1] ** 2 + vX[2] ** 2)
     return vSum
 
 
@@ -68,12 +90,11 @@ def multiplyVector3(vA, n):
     :param n: multiplier --> float or int no vektor
     :return: vector * multiplier
     """
-    a1 = vA.x1 * n
-    a2 = vA.x2 * n
-    a3 = vA.x3 * n
+    a1 = vA[0] * n
+    a2 = vA[1] * n
+    a3 = vA[2] * n
 
-    vB = vector3(a1, a2, a3)
-
+    vB = [a1, a2, a3]
     return vB
 
 
@@ -88,11 +109,11 @@ def calcVector3(vA, vB):
     :return:
     """
 
-    c1 = vB.x1 - vA.x1
-    c2 = vB.x2 - vA.x2
-    c3 = vB.x3 - vA.x3
+    c1 = vB[0] - vA[0]
+    c2 = vB[1] - vA[1]
+    c3 = vB[2] - vA[2]
 
-    vC = vector3(c1, c2, c3)
+    vC = [c1, c2, c3]
 
     return vC
 
@@ -109,11 +130,11 @@ def addVector3(vA, vB):
     :return:
     """
 
-    c1 = vB.x1 + vA.x1
-    c2 = vB.x2 + vA.x2
-    c3 = vB.x3 + vA.x3
+    c1 = vB[0] + vA[0]
+    c2 = vB[1] + vA[1]
+    c3 = vB[2] + vA[2]
 
-    vC = vector3(c1, c2, c3)
+    vC = [c1, c2, c3]
 
     return vC
 
@@ -128,7 +149,7 @@ def dotProduct(vA, vB):
     :return:
     """
 
-    dotP = (vA.x1 * vB.x1) + (vA.x2 * vB.x2) + (vA.x3 * vB.x3)
+    dotP = (vA[0] * vB[0]) + (vA[1] * vB[1]) + (vA[2] * vB[2])
     return dotP
 
 
@@ -141,11 +162,11 @@ def crossProduct(vA, vB):
     :return:
     """
 
-    c1 = vA.x2 * vB.x3 - vA.x3 * vB.x2
-    c2 = vA.x3 * vB.x1 - vA.x1 * vB.x3
-    c3 = vA.x1 * vB.x2 - vA.x2 * vB.x1
+    c1 = vA[1] * vB[2] - vA[2] * vB[1]
+    c2 = vA[2] * vB[0] - vA[0] * vB[2]
+    c3 = vA[0] * vB[1] - vA[1] * vB[0]
 
-    vC = vector3(c1, c2, c3)
+    vC = [c1, c2, c3]
 
     return vC
 
