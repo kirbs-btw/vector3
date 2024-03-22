@@ -1,5 +1,5 @@
 class plane3param:
-    def __init__(self, supportV3=vector3(), clampingA=vector3(), clampingB=vector3()):
+    def __init__(self, supportV3=[0,0,0], clampingA=[0,0,0], clampingB=[0,0,0]):
         self.supportV = supportV3
         self.clampingA = clampingA
         self.clampingB = clampingB
