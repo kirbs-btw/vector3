@@ -1,7 +1,9 @@
-__version__ = "1.5.7"
+__version__ = "1.6.1"
 
 import math
-from .vector_math import (midVector3,
+from .vector_math import (unit,
+                          invert,
+                          midVector3,
                           point3plane,
                           compareLines,
                           sumVector3,
@@ -20,11 +22,11 @@ from .intersection import (unit_v,
 from .Line import (Line,
                    ComplexLine
 )
-from .line3 import(line3)
-from .plane3 import(plane3)
-from .plane3coord import(plane3coord)
-from .plane3normal import(plane3normal)
-from .plane3param import(plane3param)
+
+from .plane3 import (plane3)
+from .plane3coord import (plane3coord)
+from .plane3normal import (plane3normal)
+from .plane3param import (plane3param)
 
 
 """
