@@ -35,40 +35,7 @@ def midVector3(vA, vB):
     vM = multiplyVector3(addVector3(vA, vB), 0.5)
     return vM
 
-def point3plane(vA, vB, vC):
-    supportV = vA
-    clampA = calcVector3(vA, vB)
-    clampB = calcVector3(vA, vC)
 
-    plane3 = plane3param(supportV, clampA, clampB)
-
-    return plane3
-
-
-def compareLines(g1, g2):
-    # I     g1.sV.x1 + g1.dV.x1 = g2.sV.x1 + g2.dV.x1
-    # II    g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
-    # III   g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
-
-    # get the value of s
-    g1sVx1 = g1.supportV[0] * g1.dirV[1] - g1.supportV[1] * g1.dirV[0]
-    g2sVx1 = g2.supportV[0] * g1.dirV[1] - g2.supportV[1] * g1.dirV[0]
-    g2dVx1 = g2.dirV[0] * g1.dirV[1] - g2.dirV[1] * g1.dirV[0]
-
-    g1sVx1 = (g1sVx1 - g2sVx1) / g2dVx1  # value of s
-
-    # get the value of r
-    g2x2 = (g2.supportV[1] + g2.dirV[1] * g1sVx1) - g1.supportV[1]
-    g2x2 = g2x2 / g1.dirV[1]  # value of r
-
-    pointR = g1.point(g2x2)
-    pointS = g2.point(g1sVx1)
-
-    if pointR == pointS:
-        return pointR
-    else:
-        # "lines don´t cross 
-        return None
 
 
 def sumVector3(vX):
@@ -154,7 +121,7 @@ def dotProduct(vA, vB):
 
 
 def crossProduct(vA, vB):
-    """
+    """ 
     does the cross product of vector A and vector B
 
     :param vA:
@@ -170,6 +137,41 @@ def crossProduct(vA, vB):
 
     return vC
 
+
+def point3plane(vA, vB, vC):
+    supportV = vA
+    clampA = calcVector3(vA, vB)
+    clampB = calcVector3(vA, vC)
+
+    plane3 = plane3param(supportV, clampA, clampB)
+
+    return plane3
+
+
+def compareLines(g1, g2):
+    # I     g1.sV.x1 + g1.dV.x1 = g2.sV.x1 + g2.dV.x1
+    # II    g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
+    # III   g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
+
+    # get the value of s
+    g1sVx1 = g1.supportV[0] * g1.dirV[1] - g1.supportV[1] * g1.dirV[0]
+    g2sVx1 = g2.supportV[0] * g1.dirV[1] - g2.supportV[1] * g1.dirV[0]
+    g2dVx1 = g2.dirV[0] * g1.dirV[1] - g2.dirV[1] * g1.dirV[0]
+
+    g1sVx1 = (g1sVx1 - g2sVx1) / g2dVx1  # value of s
+
+    # get the value of r
+    g2x2 = (g2.supportV[1] + g2.dirV[1] * g1sVx1) - g1.supportV[1]
+    g2x2 = g2x2 / g1.dirV[1]  # value of r
+
+    pointR = g1.point(g2x2)
+    pointS = g2.point(g1sVx1)
+
+    if pointR == pointS:
+        return pointR
+    else:
+        # "lines don´t cross 
+        return None
 
 """
 credits to Bastian Lipka
