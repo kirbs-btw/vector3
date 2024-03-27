@@ -135,3 +135,100 @@ Prints the attributes of the ComplexLine object.
 
 `info()`
 Prints the type of the ComplexLine object and its support and direction vectors.
+
+## plane3
+
+Represents a 3D plane. Accepts one of three possible input formats and calculates the missing forms.
+
+### Attributes
+
+- `param`: parameter form of the plane
+- `normal`: normal form of the plane
+- `coord`: coordinate form
+
+### Methods
+
+`getParam()`
+Gets the parameter form of the plane.
+
+`getNormal()`
+Gets the normal form of the plane.
+
+`getCoord()`
+Gets the coordinate form of the plane.
+
+`getForms()`
+Gets the missing forms.
+
+`print()`
+Prints the planes to visualize.
+
+## plane3coord
+
+Coordinate Representation of a plane 
+x1 + x2 + x3 = n
+
+### Attributes
+
+- `x1`: (number) value one
+- `x2`: (number) value two
+- `x3`: (number) value three
+- `n`: (number) n value
+
+### Methods
+
+`normalForm()`
+returns the normal form of the plane
+
+`paramForm()`
+returns the parameter form of the plane 
+
+`print()`
+prints the plane specs 
+
+## plane3normal
+
+Normal Plane representation
+
+### Attributes
+
+- `nV`: (vector) normal vector
+- `supportV`: (vector) support vector
+
+### Methods
+
+`paramForm()`
+returns the parameter form of the plane 
+
+`coordFord()`
+returns the coordinate form of the plane
+
+`print()`
+prints the plane specs 
+
+## plane3param
+
+Plane representation with support and two clamping vectors
+
+### Attributes
+
+- `supportV`: (vector) support vector
+- `clampingA`: (vector) clamping vector A
+- `clampingB`: (vector) clamping vector B
+
+### Methods
+
+`point(r, s)`
+retuns a point on the plane with the values r,s (number)
+
+`normalVector()`
+calculates the normal vector of the plane
+
+`coordForm()`
+returns the coordinate form of the plane
+
+`normalForm()`
+returns the normal form of the plane
+
+`print()`
+prints the plane specs 
