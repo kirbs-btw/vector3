@@ -1,6 +1,6 @@
 import math
 
-def unit(v):
+def unit(v) -> list:
         """
         calculates the unit Vector
 
@@ -12,7 +12,7 @@ def unit(v):
 
         return multiplyVector3(v, multi)
 
-def invert(v):
+def invert(v) -> list:
     """
     inverts the current vector, does not change the vector it self
     :return:
@@ -24,7 +24,7 @@ def invert(v):
     newV = [x1, x2, x3]
     return newV
 
-def midVector3(vA, vB):
+def midVector3(vA, vB) -> list:
     """
     returns the mid point of two vectors
     :param vA: vector A - type = vector3
@@ -35,10 +35,11 @@ def midVector3(vA, vB):
     vM = multiplyVector3(addVector3(vA, vB), 0.5)
     return vM
 
+def vectorLength(v) -> float:
+    vSum = math.sqrt(v[1] ** 2 + v[1] ** 2 + v[2] ** 2)
+    return vSum
 
-
-
-def sumVector3(vX):
+def sumVector3(vX) -> float:
     """
     vector sum
     :param vX: vector
@@ -49,7 +50,7 @@ def sumVector3(vX):
     return vSum
 
 
-def multiplyVector3(vA, n):
+def multiplyVector3(vA, n) -> list:
     """
     multiply vector with number
     returns new vector does not deform old one
@@ -65,7 +66,7 @@ def multiplyVector3(vA, n):
     return vB
 
 
-def calcVector3(vA, vB):
+def calcVector3(vA, vB) -> list:
     """
     vB is the second vector and vA is the starting point
     vA --------> vB
@@ -85,7 +86,7 @@ def calcVector3(vA, vB):
     return vC
 
 
-def addVector3(vA, vB):
+def addVector3(vA, vB) -> list:
     """
     Add two vectors
     a1 + b1
@@ -106,7 +107,7 @@ def addVector3(vA, vB):
     return vC
 
 
-def dotProduct(vA, vB):
+def dotProduct(vA, vB) -> float:
     """
     calculates the scalar product of two vector3´s
     a1 * b1 + a2 * b2 + a3 * b3
@@ -120,7 +121,7 @@ def dotProduct(vA, vB):
     return dotP
 
 
-def crossProduct(vA, vB):
+def crossProduct(vA, vB) -> list:
     """ 
     does the cross product of vector A and vector B
 
@@ -143,35 +144,11 @@ def point3plane(vA, vB, vC):
     clampA = calcVector3(vA, vB)
     clampB = calcVector3(vA, vC)
 
-    plane3 = plane3param(supportV, clampA, clampB)
+    param_plane = plane3param(supportV, clampA, clampB)
+    plane = plane3(paramPlane=param_plane)
+    
+    return plane
 
-    return plane3
-
-
-def compareLines(g1, g2):
-    # I     g1.sV.x1 + g1.dV.x1 = g2.sV.x1 + g2.dV.x1
-    # II    g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
-    # III   g1.sV.x2 + g1.dV.x2 = g2.sV.x2 + g2.dV.x2
-
-    # get the value of s
-    g1sVx1 = g1.supportV[0] * g1.dirV[1] - g1.supportV[1] * g1.dirV[0]
-    g2sVx1 = g2.supportV[0] * g1.dirV[1] - g2.supportV[1] * g1.dirV[0]
-    g2dVx1 = g2.dirV[0] * g1.dirV[1] - g2.dirV[1] * g1.dirV[0]
-
-    g1sVx1 = (g1sVx1 - g2sVx1) / g2dVx1  # value of s
-
-    # get the value of r
-    g2x2 = (g2.supportV[1] + g2.dirV[1] * g1sVx1) - g1.supportV[1]
-    g2x2 = g2x2 / g1.dirV[1]  # value of r
-
-    pointR = g1.point(g2x2)
-    pointS = g2.point(g1sVx1)
-
-    if pointR == pointS:
-        return pointR
-    else:
-        # "lines don´t cross 
-        return None
 
 """
 credits to Bastian Lipka
