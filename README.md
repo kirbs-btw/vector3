@@ -1,9 +1,20 @@
 # Vector3
 a library to work with 3d vectors. Including simple features like adding, multiplication or invert.
 
-# Base
+# Intor
 a vector3 is just a array of 3 numbers like:
 a = [1, 2, 3]
+
+a line contains two vectors a support and direction vector
+
+a complex line has some more features and is constucted with two points in space 
+
+the plane class in constructed with any type of plane and calulates the missing ones
+the plane contains 3 representations of the same plan to use 
+
+the paramplane is the parameter plane 
+the normalplane is the normal form of a plane
+the coordplane is the coordinate form of a plane 
 
 # Modules
 ## vector_math
