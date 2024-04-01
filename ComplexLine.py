@@ -103,15 +103,6 @@ class ComplexLine:
         x2 = self.sV[1] + self.dV[1] * v
         
         return [x1, x2, x3]
-    
-    def lenV(self, v):
-        return math.sqrt(v[0]**2 + v[1]**2 + v[2]**2)
-    
-    def unitV(self, v):
-        x1 = v[0] / self.lenV(v)
-        x2 = v[1] / self.lenV(v)
-        x3 = v[2] / self.lenV(v)  
-        return [x1, x2, x3]
 
     def point(self, s):
         x1 = self.sV[0] + self.dV[0] * s
@@ -148,7 +139,16 @@ class ComplexLine:
         print('lz: {}'.format(self.lower_z_bound))
         print('------')
 
+    
     def info(self):
         print(type(self))
         print("Support V: {}".format(self.sV))
         print("Direction V: {}".format(self.dV))
+    
+    def __str__(self):
+        return f"""
+        --- {type(self)} ---
+        sV: {self.sV}
+        dV: {self.dV}
+        --- for more info use .print() ---
+        """

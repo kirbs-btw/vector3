@@ -35,9 +35,9 @@ def midVector3(vA, vB) -> list:
     vM = multiplyVector3(addVector3(vA, vB), 0.5)
     return vM
 
-def vectorLength(v) -> float:
-    vSum = math.sqrt(v[1] ** 2 + v[1] ** 2 + v[2] ** 2)
-    return vSum
+def len(vector) -> float:
+    sum = math.sqrt(vector[1] ** 2 + vector[1] ** 2 + vector[2] ** 2)
+    return sum
 
 def sumVector3(vX) -> float:
     """
