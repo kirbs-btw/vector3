@@ -58,7 +58,7 @@ class plane3coord:
 
         return coordForm
 
-    def print(self):
+    def __str__(self):
         """
         prints the vector to visualize
         e.g.:
@@ -67,3 +67,9 @@ class plane3coord:
         """
         out = f"coord-form:         ({self[0]}x1) + ({self[1]}x2) + ({self[2]}x3) = {self.n}"
         print(out)
+        
+"""
+credits to Bastian Lipka
+-
+A lib for calculations with vectors (3d) 
+"""

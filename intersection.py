@@ -183,7 +183,6 @@ def intersection(g1, g2):
     elif bx1 != 0 and bx2 == 0 and bx3 == 0 and dx1 != 0 and dx2 == 0 and dx3 != 0:
         k = (ax3 - cx3) / dx3
         s = (cx1 + dx1*k - ax1) / bx1
-    ###
     elif bx1 != 0 and bx2 == 0 and bx3 == 0 and dx1 != 0 and dx2 != 0 and dx3 == 0:
         k = (ax2 - cx2) / dx2
         s = (cx1 + dx1*k - ax1) / bx1
@@ -371,4 +370,10 @@ if __name__ == '__main__':
 111 101 -
 111 110 -
 111 111 - 
+"""
+
+"""
+credits to Bastian Lipka
+-
+A lib for calculations with vectors (3d) 
 """

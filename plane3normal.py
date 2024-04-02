@@ -37,10 +37,17 @@ class plane3normal:
 
         return coordPlane
 
-    def print(self):
+    def __str__(self):
         """
         prints the plane
         :return:
         """
         out = f"normal-form:        {self.n} * (xV - {self.supportV}) = 0"
         print(out)
+        
+    
+"""
+credits to Bastian Lipka
+-
+A lib for calculations with vectors (3d) 
+"""

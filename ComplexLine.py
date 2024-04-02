@@ -146,3 +146,9 @@ class ComplexLine(Line):
         dV: {self.dV}
         --- for more info use .print() ---
         """
+
+"""
+credits to Bastian Lipka
+-
+A lib for calculations with vectors (3d) 
+"""

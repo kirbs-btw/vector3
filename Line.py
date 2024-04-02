@@ -22,3 +22,8 @@ class Line:
         print('sD: {}'.format(self.sD))
         print('----------------')
 
+"""
+credits to Bastian Lipka
+-
+A lib for calculations with vectors (3d) 
+"""

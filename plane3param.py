@@ -1,5 +1,5 @@
 class plane3param:
-    def __init__(self, supportV3=[0,0,0], clampingA=[0,0,0], clampingB=[0,0,0]):
+    def __init__(self, supportV=[0,0,0], clampingA=[0,0,0], clampingB=[0,0,0]):
         self.supportV = supportV3
         self.clampingA = clampingA
         self.clampingB = clampingB
@@ -48,7 +48,7 @@ class plane3param:
         normPlane3 = plane3normal(n, self.supportV)
         return normPlane3
 
-    def print(self):
+    def __str__(self):
         """
         prints the param form of the plane to vis for debug
 
@@ -62,3 +62,9 @@ class plane3param:
         clampB = self.clampingB
 
         print(f"param-form:          x-> = {support.vis()} + r * {clampA.vis()} + s * {clampB.vis()}")
+
+"""
+credits to Bastian Lipka
+-
+A lib for calculations with vectors (3d) 
+"""

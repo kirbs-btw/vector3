@@ -140,10 +140,14 @@ def crossProduct(vA, vB) -> list:
 
 
 def point3plane(vA, vB, vC):
+    # support Vector
     supportV = vA
+    
+    # calculating the clamping vectors form vA to vB and vA to vC
     clampA = calcVector3(vA, vB)
     clampB = calcVector3(vA, vC)
 
+    # creating plane3param to use in plane
     param_plane = plane3param(supportV, clampA, clampB)
     plane = plane3(paramPlane=param_plane)
     

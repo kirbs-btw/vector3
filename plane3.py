@@ -90,3 +90,9 @@ class plane3:
             self.param.print()
             self.normal.print()
             self.coord.print()
+
+"""
+credits to Bastian Lipka
+-
+A lib for calculations with vectors (3d) 
+"""
