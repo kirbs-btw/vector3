@@ -1,4 +1,6 @@
-class ComplexLine:
+import Line
+
+class ComplexLine(Line):
     def __init__(self, v1, v2):
         self.a = v1
         self.b = v2
@@ -103,12 +105,6 @@ class ComplexLine:
         x2 = self.sV[1] + self.dV[1] * v
         
         return [x1, x2, x3]
-
-    def point(self, s):
-        x1 = self.sV[0] + self.dV[0] * s
-        x2 = self.sV[1] + self.dV[1] * s
-        x3 = self.sV[2] + self.dV[2] * s
-        return [x1, x2, x3]
     
     def pointInsideLine(self, point):
         """
@@ -124,7 +120,6 @@ class ComplexLine:
             return False
         return True
         
-
     def print(self):
         print('---ComplexLine---')
         print('sV: {}'.format(self.sV))
@@ -139,7 +134,6 @@ class ComplexLine:
         print('lz: {}'.format(self.lower_z_bound))
         print('------')
 
-    
     def info(self):
         print(type(self))
         print("Support V: {}".format(self.sV))
