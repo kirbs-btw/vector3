@@ -1,28 +1,26 @@
-__version__ = "1.6.1"
+__version__ = "1.6.2"
 
 import math
 from .vector_math import (unit,
                           invert,
                           midVector3,
-                          point3plane,
-                          compareLines,
+                          len,
                           sumVector3,
                           multiplyVector3,
                           calcVector3,
                           addVector3,
                           dotProduct,
-                          crossProduct
+                          crossProduct,
+                          point3plane,
 )
 
-from .intersection import (unit_v,
-                           vector_is_equal,
+from .intersection import (vector_is_equal,
                            compare_dir_v,
                            intersection
 )
-from .Line import (Line,
+from .Line import (Line, 
                    ComplexLine
 )
-
 from .plane3 import (plane3)
 from .plane3coord import (plane3coord)
 from .plane3normal import (plane3normal)
